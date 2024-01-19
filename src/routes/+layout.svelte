@@ -11,10 +11,6 @@ import '../app.pcss';
 	//Import darkMode
 	import { ModeWatcher } from 'mode-watcher';
 	import { toggleMode } from 'mode-watcher';
-	//Import Page store
-	import { page } from '$app/stores';
-	//Import types
-	import type { dataTypeLay } from '$lib/types/types';
 
 	//NavMenu
 	let NavMenu: string[][] = [['Home','/'],['About', '/about']];

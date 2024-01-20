@@ -11,7 +11,7 @@
     ],
     "background_color": "#3367D6",
     "display": "standalone",
-    "scope": "/",
+    "scope": "/PasswordGenerator",
     "theme_color": "#3367D6",
     "description": "a better Password Generator"
 }

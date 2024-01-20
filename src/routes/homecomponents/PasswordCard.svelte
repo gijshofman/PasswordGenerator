@@ -146,8 +146,8 @@
 	}
 </script>
 
-<Card.Root class="mx-auto w-full lg:max-w-screen-md ">
-	<Card.Content class="grid gap-6">
+<Card.Root class="mx-auto w-full lg:max-w-screen-md">
+	<Card.Content class="grid gap-4">
 		{#if ListOfPasswords.length > 0}
 			<div class="mt-2 flex space-x-2">
 				{#if ListOfPasswords.length > 1}
@@ -163,7 +163,7 @@
 				<p>Your Password(s)</p>
 			</div>
 			<Card.Root>
-				<Card.Content>
+				<Card.Content class="flex overflow-auto max-h-80">
 					<ul>
 						{#each ListOfPasswords as Password}
 							<div class="mt-2 flex justify-between space-x-2">

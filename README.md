@@ -12,20 +12,16 @@ To utilize this generator, specify the desired password length and the quantity 
 
 After cloning the Git repository (ensure to delete the "build" folder intended for GitHub Pages) and installing dependencies with `pnpm install` (or `npm install` or `yarn`), initiate a development server:
 
-`bash
-pnpm run dev
-`
+`pnpm run dev`
 ## Alternatively, start the server and open the app in a new browser tab
 
-pnpm run dev -- --open 
+`pnpm run dev -- --open `
 
 ##Production Build
 
 To create a production-ready version of your app:
 
-```bash
-Copy code
-npm run build
+`npm run build`
 
 ## Acknowledgements
 

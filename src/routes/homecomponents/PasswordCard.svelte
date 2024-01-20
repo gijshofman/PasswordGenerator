@@ -32,6 +32,11 @@
 		location.reload();
 	}
 
+	function HandleChangeOptions() {
+		let currentPasswords = ListOfPasswords.length;
+		ListOfPasswords = [];
+		generatePasswords(currentPasswords, PasswordLength, UpperCase, Numbers, Symbols, Symbols2);
+	}
 	// Password Scripts
 	function arrayFromLowToHigh(low: number, high: number) {
 		const array = [];
@@ -130,6 +135,7 @@
 
 		document.body.removeChild(textArea);
 	}
+
 	function copyTextToClipboard(text: string) {
 		if (!navigator.clipboard) {
 			fallbackCopyTextToClipboard(text);
@@ -190,14 +196,19 @@
 
 		<div class="mt-2 flex space-x-2">
 			<p>amount characters</p>
-			<Input type="number" bind:value={PasswordLength} />
+			<Input type="number" bind:value={PasswordLength} on:change={HandleChangeOptions} />
 		</div>
 		<div class="mt-2 flex space-x-2">
 			<p>amount of passwords</p>
-			<Input type="number" bind:value={AmountPasswords} />
+			<Input type="number" bind:value={AmountPasswords} on:change={HandleChangeOptions} />
 		</div>
 		<div class="mt-2 flex space-x-2">
-			<Checkbox id="UpperCase" bind:checked={UpperCase} aria-labelledby="UpperCase-label" />
+			<Checkbox
+				id="UpperCase"
+				bind:checked={UpperCase}
+				on:click={HandleChangeOptions}
+				aria-labelledby="UpperCase-label"
+			/>
 			<Label
 				id="UpperCase-label"
 				for="UpperCase"
@@ -205,7 +216,12 @@
 			>
 				UpperCase
 			</Label>
-			<Checkbox id="Numbers" bind:checked={Numbers} aria-labelledby="Numbers-label" />
+			<Checkbox
+				id="Numbers"
+				bind:checked={Numbers}
+				on:click={HandleChangeOptions}
+				aria-labelledby="Numbers-label"
+			/>
 			<Label
 				id="Numbers-label"
 				for="Numbers"
@@ -215,14 +231,24 @@
 			</Label>
 		</div>
 		<div class="mt-2 flex space-x-2">
-			<Checkbox id="Symbols" bind:checked={Symbols} aria-labelledby="Symbols-label" />
+			<Checkbox
+				id="Symbols"
+				bind:checked={Symbols}
+				on:click={HandleChangeOptions}
+				aria-labelledby="Symbols-label"
+			/>
 			<Label
 				id="Symbols-label"
 				for="Symbols"
 				class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
 			>
 				Symbols
-			</Label><Checkbox id="Symbols2" bind:checked={Symbols2} aria-labelledby="Symbols2-label" />
+			</Label><Checkbox
+				id="Symbols2"
+				bind:checked={Symbols2}
+				on:click={HandleChangeOptions}
+				aria-labelledby="Symbols2-label"
+			/>
 			<Label
 				id="Symbols2-label"
 				for="Symbols2"
@@ -232,7 +258,9 @@
 			</Label>
 		</div>
 		<div class="mt-2 flex space-x-2">
-			<Button variant={'outline'} class="drop-shadow-lg" on:click={HandleGeneratePasswords}>Generate Password(s)</Button>
+			<Button variant={'outline'} class="drop-shadow-lg" on:click={HandleGeneratePasswords}
+				>Generate Password(s)</Button
+			>
 			<Button variant={'outline'} class="drop-shadow-lg" on:click={HandleReset}>Reset</Button>
 		</div>
 	</Card.Content>

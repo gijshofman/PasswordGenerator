@@ -15,7 +15,7 @@
 	$: Numbers = true;
 	$: Symbols = true;
 	$: Symbols2 = false;
-	$: AmountPasswords = 1;
+	$: AmountPasswords = 5;
 	$: PasswordLength = 14;
 
 	let ListOfPasswords: string[] = [];

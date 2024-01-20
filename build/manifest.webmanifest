@@ -1,12 +1,12 @@
 {
     "short_name": "PasswordGenerator",
     "name": "Password Generator",
-    "start_url": "/",
+    "start_url": "/PasswordGenerator",
     "icons": [
       {
         "src": "./logo.png",
         "type": "image/png",
-        "sizes": "512x512"
+        "sizes": "200x200"
       }
     ],
     "background_color": "#3367D6",

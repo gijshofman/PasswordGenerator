@@ -13,7 +13,7 @@ import '../app.pcss';
 	import { toggleMode } from 'mode-watcher';
 
 	//NavMenu
-	let NavMenu: string[][] = [['Home','/'],['About', '/PasswordGenerator/about']];
+	let NavMenu: string[][] = [['Home','/PasswordGenerator'],['About', '/PasswordGenerator/about']];
 	$navbarHidden = false;
 </script>
 

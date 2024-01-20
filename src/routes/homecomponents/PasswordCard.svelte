@@ -15,17 +15,17 @@
 	$: Numbers = true;
 	$: Symbols = true;
 	$: Symbols2 = false;
-	$: AmountPasswords = 1;
-	$: AmountCharacters = 14;
+	$: AmountPasswords = 5;
+	$: PasswordLength = 14;
 
 	let ListOfPasswords: string[] = [];
 
 	onMount(() => {
-		generatePasswords(1, AmountCharacters, UpperCase, Numbers, Symbols, Symbols2);
+		generatePasswords(1, PasswordLength, UpperCase, Numbers, Symbols, Symbols2);
 	});
 
 	function HandleGeneratePasswords() {
-		generatePasswords(AmountPasswords, AmountCharacters, UpperCase, Numbers, Symbols, Symbols2);
+		generatePasswords(AmountPasswords, PasswordLength, UpperCase, Numbers, Symbols, Symbols2);
 	}
 
 	function HandleReset() {
@@ -93,7 +93,7 @@
 
 	function generatePasswords(
 		amount: number,
-		AmountCharacters: number,
+		PasswordLength: number,
 		UpperCase: boolean,
 		Numbers: boolean,
 		Symbols: boolean,
@@ -102,7 +102,7 @@
 		for (let i = 0; i < amount; i++) {
 			ListOfPasswords = [
 				...ListOfPasswords,
-				generatePassword(AmountCharacters, UpperCase, Numbers, Symbols, Symbols2)
+				generatePassword(PasswordLength, UpperCase, Numbers, Symbols, Symbols2)
 			];
 		}
 	}
@@ -146,7 +146,7 @@
 	}
 </script>
 
-<Card.Root class="mx-auto max-w-screen-md">
+<Card.Root class="mx-auto max-w-screen-md ">
 	<Card.Content class="grid gap-6">
 		{#if ListOfPasswords.length > 0}
 			<div class="mt-2 flex space-x-2">
@@ -155,6 +155,7 @@
 						on:click={() => copyTextToClipboard(ListOfPasswords.join('\n'))}
 						variant="outline"
 						size="icon"
+						class="drop-shadow-lg"
 					>
 						<Copy className="h-4 w-4" />
 					</Button>
@@ -171,6 +172,7 @@
 										on:click={() => copyTextToClipboard(Password)}
 										variant="outline"
 										size="icon"
+										class="drop-shadow-lg"
 									>
 										<Copy className="h-4 w-4" />
 									</Button>
@@ -188,7 +190,7 @@
 
 		<div class="mt-2 flex space-x-2">
 			<p>amount characters</p>
-			<Input type="number" bind:value={AmountCharacters} />
+			<Input type="number" bind:value={PasswordLength} />
 		</div>
 		<div class="mt-2 flex space-x-2">
 			<p>amount of passwords</p>
@@ -230,8 +232,8 @@
 			</Label>
 		</div>
 		<div class="mt-2 flex space-x-2">
-			<Button variant={'outline'} on:click={HandleGeneratePasswords}>Generate Password(s)</Button>
-			<Button variant={'outline'} on:click={HandleReset}>Reset</Button>
+			<Button variant={'outline'} class="drop-shadow-lg" on:click={HandleGeneratePasswords}>Generate Password(s)</Button>
+			<Button variant={'outline'} class="drop-shadow-lg" on:click={HandleReset}>Reset</Button>
 		</div>
 	</Card.Content>
 </Card.Root>

@@ -18,19 +18,17 @@ import '../app.pcss';
 </script>
 
 <div class="centered">
-	<Card.Root class="mx-auto max-w-screen-md overflow-auto">
-		<Card.Header>
-			<Card.Title>Password Generator v 0.2.0.3</Card.Title>
-			<Card.Description>A webbased Password Generator</Card.Description>
-		</Card.Header>
-		<Card.Content>
+	<Card.Root class="mx-auto max-w-screen-md overflow-auto drop-shadow-lg">
+		<Card.Header class="bg-slate-400 drop-shadow-lg">
+			<Card.Title class="text-black">Password Generator v 0.2.0.3</Card.Title>
+			<Card.Description class="text-black">A webbased Password Generator</Card.Description>
 			<ModeWatcher />
 			{#if $navbarHidden == false}
 				<div class="border-b">
 					<div class="flex h-16 items-center px-4">
 						<DropdownMenu.Root>
 							<DropdownMenu.Trigger asChild let:builder>
-								<Button variant="ghost" builders={[builder]} class="relative h-8 w-8 rounded-full">
+								<Button variant="ghost" builders={[builder]} class="relative h-8 w-8 color-black">
 									<Avatar.Root class="h-8 w-8">
 										<Menu class="h-full w-full" />
 									</Avatar.Root>
@@ -46,7 +44,7 @@ import '../app.pcss';
 							</DropdownMenu.Content>
 						</DropdownMenu.Root>
 						<div class="ml-auto flex items-center space-x-4">
-							<Button on:click={toggleMode} variant="outline" size="icon">
+							<Button on:click={toggleMode} variant="outline" size="icon" class="drop-shadow-lg">
 								<Sun
 									class="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0"
 								/>
@@ -59,6 +57,9 @@ import '../app.pcss';
 					</div>
 				</div>
 			{/if}
+		</Card.Header>
+		<Card.Content class="drop-shadow-lg">
+			
 			<slot />
 		</Card.Content>
 		<Card.Footer>

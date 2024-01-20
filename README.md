@@ -1,38 +1,40 @@
-# create-svelte
+# Password Generator
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/main/packages/create-svelte).
+Welcome to the Password Generator – your solution for creating secure and easily usable passwords. I encountered challenges in generating multiple passwords that remain human-readable with the available free online tools. Consequently, I developed this tool to address that issue.
 
-## Creating a project
+Explore the Password Generator at: [Password Generator](https://gijshofman.github.io/PasswordGenerator/)
 
-If you're seeing this, you've probably already done this step. Congrats!
+## Usage
 
-```bash
-# create a new project in the current directory
-npm create svelte@latest
+To utilize this generator, specify the desired password length and the quantity of passwords needed. Click the "Generate" button to obtain your passwords.
 
-# create a new project in my-app
-npm create svelte@latest my-app
-```
+## Development
 
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+After cloning the Git repository (ensure to delete the "build" folder intended for GitHub Pages) and installing dependencies with `pnpm install` (or `npm install` or `yarn`), initiate a development server:
 
 ```bash
-npm run dev
+pnpm run dev
 
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
+## Alternatively, start the server and open the app in a new browser tab
 
-## Building
+pnpm run dev -- --open 
 
-To create a production version of your app:
+##Production Build
+
+To create a production-ready version of your app:
 
 ```bash
+Copy code
 npm run build
-```
 
-You can preview the production build with `npm run preview`.
+## Acknowledgements
 
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+I built this project using the following community tools:
+
+- SvelteKit
+- Chadcn UI (Svelte)
+
+## License
+
+This project is made publicly available under the MIT license. Please refer to the license terms for more information. 
+Ensure to verify the websites of all dependencies used in this project.

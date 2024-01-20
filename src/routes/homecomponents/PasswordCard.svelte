@@ -32,9 +32,10 @@
 		location.reload();
 	}
 
-	function HandleChangeOptions() {
+	async function HandleChangeOptions() {
 		let currentPasswords = ListOfPasswords.length;
 		ListOfPasswords = [];
+		await new Promise(f => setTimeout(f, 1000));
 		generatePasswords(currentPasswords, PasswordLength, UpperCase, Numbers, Symbols, Symbols2);
 	}
 	// Password Scripts

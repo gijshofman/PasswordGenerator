@@ -17,8 +17,8 @@ import '../app.pcss';
 	$navbarHidden = false;
 </script>
 
-<div class="centered">
-	<Card.Root class="mx-auto max-w-sreen-full md:max-w-screen-md overflow-auto drop-shadow-lg">
+<div class="lg:centered lg:mt-2">
+	<Card.Root class="lg:mx-auto w-full lg:max-w-screen-md overflow-auto drop-shadow-lg">
 		<Card.Header class="bg-slate-400 drop-shadow-lg">
 			<Card.Title class="text-black">Password Generator v 0.2.0.3</Card.Title>
 			<Card.Description class="text-black">A webbased Password Generator</Card.Description>
@@ -69,10 +69,3 @@ import '../app.pcss';
 		</Card.Footer>
 	</Card.Root>
 </div>
-
-<style>
-	.centered {
-		text-align: center;
-		margin-top: 1rem;
-	}
-</style>

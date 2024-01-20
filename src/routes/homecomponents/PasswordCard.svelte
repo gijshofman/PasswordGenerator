@@ -146,7 +146,7 @@
 	}
 </script>
 
-<Card.Root class="mx-auto max-w-screen-full md:max-w-screen-md ">
+<Card.Root class="mx-auto w-full lg:max-w-screen-md ">
 	<Card.Content class="grid gap-6">
 		{#if ListOfPasswords.length > 0}
 			<div class="mt-2 flex space-x-2">

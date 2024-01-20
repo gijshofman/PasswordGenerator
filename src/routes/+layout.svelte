@@ -69,7 +69,7 @@ import '../app.pcss';
 		</Card.Content>
 		<Card.Footer>
 			<Card.Description
-				>Build and maintained by HofmanICT © 2024, MIT licensed 2024</Card.Description
+				>Build and maintained by Gijs Hofman © 2024, MIT licensed 2024</Card.Description
 			>
 		</Card.Footer>
 	</Card.Root>

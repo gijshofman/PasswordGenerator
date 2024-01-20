@@ -18,7 +18,7 @@ import '../app.pcss';
 </script>
 
 <div class="centered">
-	<Card.Root class="mx-auto max-w-screen-md overflow-auto drop-shadow-lg">
+	<Card.Root class="mx-auto max-w-sreen-full md:max-w-screen-md overflow-auto drop-shadow-lg">
 		<Card.Header class="bg-slate-400 drop-shadow-lg">
 			<Card.Title class="text-black">Password Generator v 0.2.0.3</Card.Title>
 			<Card.Description class="text-black">A webbased Password Generator</Card.Description>

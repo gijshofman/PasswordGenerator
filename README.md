@@ -14,13 +14,13 @@ After cloning the Git repository (ensure to delete the "build" folder intended f
 
 `pnpm run dev`
 
-# Alternatively, start the server and open the app in a new browser tab or host it to open it on a othe device in the network
+### Alternatively, start the server and open the app in a new browser tab or host it to open it on a othe device in the network
 
 `pnpm run dev -- --open `
 
 `pnpm run dev --host - --open`
 
-#Production Build
+### Production Build
 
 To create a production-ready version of your app:
 

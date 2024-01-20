@@ -1,7 +1,7 @@
 {
     "short_name": "PasswordGenerator",
     "name": "Password Generator",
-    "start_url": "/PasswordGenerator",
+    "start_url": "../PasswordGenerator/",
     "icons": [
       {
         "src": "./logo.png",
@@ -11,7 +11,7 @@
     ],
     "background_color": "#3367D6",
     "display": "standalone",
-    "scope": "/PasswordGenerator",
+    "scope": "/",
     "theme_color": "#3367D6",
     "description": "a better Password Generator"
 }

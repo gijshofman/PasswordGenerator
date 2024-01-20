@@ -24,7 +24,7 @@ After cloning the Git repository (ensure to delete the "build" folder intended f
 
 To create a production-ready version of your app:
 
-`npm run build`
+`pnpm run build`
 
 ## Acknowledgements
 

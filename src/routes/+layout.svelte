@@ -17,7 +17,7 @@ import '../app.pcss';
 	$navbarHidden = false;
 </script>
 
-<div class="lg:centered lg:mt-2">
+<div class="lg:centered lg:mt-2 bg-slate-50">
 	<Card.Root class="lg:mx-auto w-full lg:max-w-screen-md overflow-auto drop-shadow-lg">
 		<Card.Header class="bg-slate-400 drop-shadow-lg">
 			<Card.Title class="text-black">Password Generator v 0.2.0.3</Card.Title>

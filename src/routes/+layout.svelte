@@ -11,7 +11,8 @@ import '../app.pcss';
 	//Import darkMode
 	import { ModeWatcher } from 'mode-watcher';
 	import { toggleMode } from 'mode-watcher';
-
+	//Import Static Content
+	import logo from '$lib/assets/logo.png';
 	//NavMenu
 	let NavMenu: string[][] = [['Home','/PasswordGenerator'],['About', '/PasswordGenerator/about']];
 	$navbarHidden = false;
@@ -22,7 +23,7 @@ import '../app.pcss';
 	<Card.Root class="lg:mx-auto w-full lg:max-w-screen-md overflow-auto drop-shadow-lg">
 		<Card.Header class="bg-slate-400 drop-shadow-lg">
 			<Card.Title class="text-black flex m-auto items-center">
-				<img src="/logo.png" alt="logo" class="h-24 w-24" />
+				<img src={logo} alt="logo" class="h-24 w-24" />
 				PassBox v 0.2.0.3
 			</Card.Title>
 			<Card.Description class="text-black m-auto items-center">A webbased Password Generator</Card.Description>

@@ -9,7 +9,7 @@
 	import Input from '$lib/components/ui/input/input.svelte';
 	import { Separator } from '$lib/components/ui/separator';
 	import { onMount } from 'svelte';
-	import { Copy, List } from 'lucide-svelte';
+	import { Copy } from 'lucide-svelte';
 
 	$: UpperCase = true;
 	$: Numbers = true;

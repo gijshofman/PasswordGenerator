@@ -15,13 +15,13 @@
 	$: Numbers = true;
 	$: Symbols = true;
 	$: Symbols2 = false;
-	$: AmountPasswords = 5;
+	$: AmountPasswords = 1;
 	$: PasswordLength = 14;
 
 	let ListOfPasswords: string[] = [];
 
 	onMount(() => {
-		generatePasswords(1, PasswordLength, UpperCase, Numbers, Symbols, Symbols2);
+		generatePasswords(5, PasswordLength, UpperCase, Numbers, Symbols, Symbols2);
 	});
 
 	function HandleGeneratePasswords() {

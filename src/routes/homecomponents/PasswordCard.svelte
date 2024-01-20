@@ -163,7 +163,7 @@
 				<p>Your Password(s)</p>
 			</div>
 			<Card.Root>
-				<Card.Content class="flex overflow-auto max-h-80">
+				<Card.Content class="flex overflow-auto lg:max-h-80">
 					<ul>
 						{#each ListOfPasswords as Password}
 							<div class="mt-2 flex justify-between space-x-2">

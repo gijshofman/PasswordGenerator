@@ -24,7 +24,7 @@ import '../app.pcss';
 		<Card.Header class="bg-slate-400 drop-shadow-lg">
 			<Card.Title class="text-black flex m-auto items-center">
 				<img src={logo} alt="logo" class="h-16 w-16" />
-				PassBox v 0.2.0.3
+				PassBox v 0.2.0.4
 			</Card.Title>
 			<Card.Description class="text-black m-auto items-center">A webbased Password Generator</Card.Description>
 			<ModeWatcher />

@@ -71,7 +71,7 @@
 		includeNumbers: boolean,
 		excludeIl1: boolean,
 		includeSymbols: boolean,
-		includeSymbols2: boolean
+		includeHashtag: boolean
 	) {
 		let charCodes = LOWERCASE_CHAR_CODES;
 		if (includeUppercase === true) charCodes = charCodes.concat(UPPERCASE_CHAR_CODES);
@@ -102,7 +102,7 @@
 			NewPassword = passwordArray.join('');
 		}
 
-		if(!includeSymbols && includeSymbols2) {
+		if(!includeSymbols && includeHashtag) {
 			let randomIndex = Math.floor(Math.random() * characterAmount);
 			let passwordArray = NewPassword.split('');
 			passwordArray[randomIndex] = '#';
@@ -119,12 +119,12 @@
 		Numbers: boolean,
 		Excludeil1: boolean,
 		Symbols: boolean,
-		Symbols2: boolean
+		Hashtag: boolean
 	) {
 		for (let i = 0; i < amount; i++) {
 			ListOfPasswords = [
 				...ListOfPasswords,
-				generatePassword(PasswordLength, UpperCase, Numbers, Excludeil1, Symbols, Symbols2)
+				generatePassword(PasswordLength, UpperCase, Numbers, Excludeil1, Symbols, Hashtag)
 			];
 		}
 	}
@@ -274,14 +274,14 @@
 			>
 				Symbols
 			</Label><Checkbox
-				id="Symbols2"
+				id="Hashtag"
 				bind:checked={Hashtag}
 				on:click={HandleChangeOptions}
-				aria-labelledby="Symbols2-label"
+				aria-labelledby="Hashtag-label"
 			/>
 			<Label
-				id="Symbols2-label"
-				for="Symbols2"
+				id="Hashtag-label"
+				for="Hashtag"
 				class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
 			>
 				Hashtag

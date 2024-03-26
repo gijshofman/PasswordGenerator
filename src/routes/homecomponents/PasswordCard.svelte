@@ -13,20 +13,20 @@
 
 	$: UpperCase = true;
 	$: Numbers = true;
-	$: Excludeil1 = true;
+	$: ExcludeSimilar = true;
 	$: Symbols = false;
-	$: Hashtag = true;
+	$: SimpleSymbols = true;
 	$: AmountPasswords = 5;
 	$: PasswordLength = 14;
 
 	let ListOfPasswords: string[] = [];
 
 	onMount(() => {
-		generatePasswords(5, PasswordLength, UpperCase, Numbers, Excludeil1, Symbols, Hashtag);
+		generatePasswords(5, PasswordLength, UpperCase, Numbers, ExcludeSimilar, Symbols, SimpleSymbols);
 	});
 
 	function HandleGeneratePasswords() {
-		generatePasswords(AmountPasswords, PasswordLength, UpperCase, Numbers, Excludeil1, Symbols, Hashtag);
+		generatePasswords(AmountPasswords, PasswordLength, UpperCase, Numbers, ExcludeSimilar, Symbols, SimpleSymbols);
 	}
 
 	function HandleReset() {
@@ -37,7 +37,7 @@
 		let currentPasswords = ListOfPasswords.length;
 		ListOfPasswords = [];
 		await new Promise(f => setTimeout(f, 1000));
-		generatePasswords(currentPasswords, PasswordLength, UpperCase, Numbers, Excludeil1, Symbols, Hashtag);
+		generatePasswords(currentPasswords, PasswordLength, UpperCase, Numbers, ExcludeSimilar, Symbols, SimpleSymbols);
 	}
 	// Password Scripts
 	function arrayFromLowToHigh(low: number, high: number) {
@@ -64,20 +64,21 @@
 		.concat(arrayFromLowToHigh(35, 36))
 		.concat(arrayFromLowToHigh(38, 38))
 		.concat(arrayFromLowToHigh(42, 42));
+	const SIMPLE_SYMBOLS_CHAR_CODES = ['!', '@', '#', '$'];
 
 	function generatePassword(
 		characterAmount: number,
 		includeUppercase: boolean,
 		includeNumbers: boolean,
-		excludeIl1: boolean,
+		ExcludeSimilar: boolean,
 		includeSymbols: boolean,
-		includeHashtag: boolean
+		includeSimpleSymbols: boolean
 	) {
 		let charCodes = LOWERCASE_CHAR_CODES;
 		if (includeUppercase === true) charCodes = charCodes.concat(UPPERCASE_CHAR_CODES);
 		if (includeNumbers === true) charCodes = charCodes.concat(NUMBER_CHAR_CODES);
 		if (includeSymbols === true) charCodes = charCodes.concat(SYMBOL_CHAR_CODES);
-		if(excludeIl1) removeItemsFromArray(charCodes, [49, 73, 105, 108]);
+		if(ExcludeSimilar) removeItemsFromArray(charCodes, [48, 49, 73, 79, 105, 108, 111]);
 
 		const passwordCharacters = [];
 
@@ -102,10 +103,10 @@
 			NewPassword = passwordArray.join('');
 		}
 
-		if(!includeSymbols && includeHashtag) {
+		if(!includeSymbols && includeSimpleSymbols) {
 			let randomIndex = Math.floor(Math.random() * characterAmount);
 			let passwordArray = NewPassword.split('');
-			passwordArray[randomIndex] = '#';
+			passwordArray[randomIndex] = SIMPLE_SYMBOLS_CHAR_CODES[Math.floor(Math.random() * SIMPLE_SYMBOLS_CHAR_CODES.length)];
 			NewPassword = passwordArray.join('');
 		}
 
@@ -117,14 +118,14 @@
 		PasswordLength: number,
 		UpperCase: boolean,
 		Numbers: boolean,
-		Excludeil1: boolean,
+		ExcludeSimilar: boolean,
 		Symbols: boolean,
-		Hashtag: boolean
+		SimpleSymbols: boolean
 	) {
 		for (let i = 0; i < amount; i++) {
 			ListOfPasswords = [
 				...ListOfPasswords,
-				generatePassword(PasswordLength, UpperCase, Numbers, Excludeil1, Symbols, Hashtag)
+				generatePassword(PasswordLength, UpperCase, Numbers, ExcludeSimilar, Symbols, SimpleSymbols)
 			];
 		}
 	}
@@ -247,20 +248,33 @@
 				Numbers
 			</Label>
 			<Checkbox
-				id="Excludeil1"
-				bind:checked={Excludeil1}
+				id="ExcludeSimilar"
+				bind:checked={ExcludeSimilar}
 				on:click={HandleChangeOptions}
-				aria-labelledby="Excludeil1-label"
+				aria-labelledby="ExcludeSimilar-label"
 			/>
 			<Label
-				id="Excludeil1-label"
-				for="Excludeil1"
+				id="ExcludeSimilar-label"
+				for="ExcludeSimilar"
 				class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
 			>
-				Exclude i-l-1
+				Exclude Similar
 			</Label>
 		</div>
 		<div class="mt-2 flex space-x-2">
+			<Checkbox
+				id="SimpleSymbols"
+				bind:checked={SimpleSymbols}
+				on:click={HandleChangeOptions}
+				aria-labelledby="SimpleSymbols-label"
+			/>
+			<Label
+				id="SimpleSymbols-label"
+				for="SimpleSymbols"
+				class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+			>
+				Simple Symbols
+			</Label>
 			<Checkbox
 				id="Symbols"
 				bind:checked={Symbols}
@@ -273,18 +287,6 @@
 				class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
 			>
 				Symbols
-			</Label><Checkbox
-				id="Hashtag"
-				bind:checked={Hashtag}
-				on:click={HandleChangeOptions}
-				aria-labelledby="Hashtag-label"
-			/>
-			<Label
-				id="Hashtag-label"
-				for="Hashtag"
-				class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-			>
-				Hashtag
 			</Label>
 		</div>
 		<div class="mt-2 flex space-x-2">

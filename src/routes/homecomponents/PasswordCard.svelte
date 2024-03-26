@@ -10,6 +10,7 @@
 	import { Separator } from '$lib/components/ui/separator';
 	import { onMount } from 'svelte';
 	import { Copy } from 'lucide-svelte';
+	import * as Tooltip from '$lib/components/ui/tooltip/index.js';
 
 	$: UpperCase = true;
 	$: Numbers = true;
@@ -17,16 +18,32 @@
 	$: Symbols = false;
 	$: SimpleSymbols = true;
 	$: AmountPasswords = 5;
-	$: PasswordLength = 14;
+	$: PasswordLength = 12;
 
 	let ListOfPasswords: string[] = [];
 
 	onMount(() => {
-		generatePasswords(5, PasswordLength, UpperCase, Numbers, ExcludeSimilar, Symbols, SimpleSymbols);
+		generatePasswords(
+			5,
+			PasswordLength,
+			UpperCase,
+			Numbers,
+			ExcludeSimilar,
+			Symbols,
+			SimpleSymbols
+		);
 	});
 
 	function HandleGeneratePasswords() {
-		generatePasswords(AmountPasswords, PasswordLength, UpperCase, Numbers, ExcludeSimilar, Symbols, SimpleSymbols);
+		generatePasswords(
+			AmountPasswords,
+			PasswordLength,
+			UpperCase,
+			Numbers,
+			ExcludeSimilar,
+			Symbols,
+			SimpleSymbols
+		);
 	}
 
 	function HandleReset() {
@@ -36,8 +53,16 @@
 	async function HandleChangeOptions() {
 		let currentPasswords = ListOfPasswords.length;
 		ListOfPasswords = [];
-		await new Promise(f => setTimeout(f, 1000));
-		generatePasswords(currentPasswords, PasswordLength, UpperCase, Numbers, ExcludeSimilar, Symbols, SimpleSymbols);
+		await new Promise((f) => setTimeout(f, 1000));
+		generatePasswords(
+			currentPasswords,
+			PasswordLength,
+			UpperCase,
+			Numbers,
+			ExcludeSimilar,
+			Symbols,
+			SimpleSymbols
+		);
 	}
 	// Password Scripts
 	function arrayFromLowToHigh(low: number, high: number) {
@@ -49,11 +74,10 @@
 	}
 
 	function removeItemsFromArray(array: any[], value: any[]) {
-		for(let i = 0; i < value.length; i++) {
+		for (let i = 0; i < value.length; i++) {
 			let index = array.indexOf(value[i]);
 
-			if(index != -1)
-				array.splice(index, 1);
+			if (index != -1) array.splice(index, 1);
 		}
 	}
 
@@ -78,7 +102,7 @@
 		if (includeUppercase === true) charCodes = charCodes.concat(UPPERCASE_CHAR_CODES);
 		if (includeNumbers === true) charCodes = charCodes.concat(NUMBER_CHAR_CODES);
 		if (includeSymbols === true) charCodes = charCodes.concat(SYMBOL_CHAR_CODES);
-		if(ExcludeSimilar) removeItemsFromArray(charCodes, [48, 49, 73, 79, 105, 108, 111]);
+		if (ExcludeSimilar) removeItemsFromArray(charCodes, [48, 49, 73, 79, 105, 108, 111]);
 
 		const passwordCharacters = [];
 
@@ -103,10 +127,11 @@
 			NewPassword = passwordArray.join('');
 		}
 
-		if(!includeSymbols && includeSimpleSymbols) {
+		if (!includeSymbols && includeSimpleSymbols) {
 			let randomIndex = Math.floor(Math.random() * characterAmount);
 			let passwordArray = NewPassword.split('');
-			passwordArray[randomIndex] = SIMPLE_SYMBOLS_CHAR_CODES[Math.floor(Math.random() * SIMPLE_SYMBOLS_CHAR_CODES.length)];
+			passwordArray[randomIndex] =
+				SIMPLE_SYMBOLS_CHAR_CODES[Math.floor(Math.random() * SIMPLE_SYMBOLS_CHAR_CODES.length)];
 			NewPassword = passwordArray.join('');
 		}
 
@@ -175,14 +200,21 @@
 		{#if ListOfPasswords.length > 0}
 			<div class="mt-2 flex space-x-2">
 				{#if ListOfPasswords.length > 1}
-					<Button
-						on:click={() => copyTextToClipboard(ListOfPasswords.join('\n'))}
-						variant="outline"
-						size="icon"
-						class="drop-shadow-lg"
-					>
-						<Copy className="h-4 w-4" />
-					</Button>
+					<Tooltip.Root>
+						<Tooltip.Trigger>
+							<Button
+								on:click={() => copyTextToClipboard(ListOfPasswords.join('\n'))}
+								variant="outline"
+								size="icon"
+								class="drop-shadow-lg"
+							>
+								<Copy className="h-4 w-4" />
+							</Button>
+						</Tooltip.Trigger>
+						<Tooltip.Content>
+							<p>Copy all passwords to the clipboard</p>
+						</Tooltip.Content>
+					</Tooltip.Root>
 				{/if}
 				<p>Your Password(s)</p>
 			</div>
@@ -192,14 +224,21 @@
 						{#each ListOfPasswords as Password}
 							<div class="mt-2 flex justify-between space-x-2">
 								<li>
-									<Button
-										on:click={() => copyTextToClipboard(Password)}
-										variant="outline"
-										size="icon"
-										class="drop-shadow-lg"
-									>
-										<Copy className="h-4 w-4" />
-									</Button>
+									<Tooltip.Root>
+										<Tooltip.Trigger>
+											<Button
+												on:click={() => copyTextToClipboard(Password)}
+												variant="outline"
+												size="icon"
+												class="drop-shadow-lg"
+											>
+												<Copy className="h-4 w-4" />
+											</Button>
+										</Tooltip.Trigger>
+										<Tooltip.Content>
+											<p>Copy this password to the clipboard</p>
+										</Tooltip.Content>
+									</Tooltip.Root>
 									{Password}
 								</li>
 							</div>
@@ -221,73 +260,110 @@
 			<Input type="number" bind:value={AmountPasswords} on:change={HandleChangeOptions} />
 		</div>
 		<div class="mt-2 flex space-x-2">
-			<Checkbox
-				id="UpperCase"
-				bind:checked={UpperCase}
-				on:click={HandleChangeOptions}
-				aria-labelledby="UpperCase-label"
-			/>
-			<Label
-				id="UpperCase-label"
-				for="UpperCase"
-				class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-			>
-				UpperCase
-			</Label>
-			<Checkbox
-				id="Numbers"
-				bind:checked={Numbers}
-				on:click={HandleChangeOptions}
-				aria-labelledby="Numbers-label"
-			/>
-			<Label
-				id="Numbers-label"
-				for="Numbers"
-				class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-			>
-				Numbers
-			</Label>
-			<Checkbox
-				id="ExcludeSimilar"
-				bind:checked={ExcludeSimilar}
-				on:click={HandleChangeOptions}
-				aria-labelledby="ExcludeSimilar-label"
-			/>
-			<Label
-				id="ExcludeSimilar-label"
-				for="ExcludeSimilar"
-				class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-			>
-				Exclude Similar
-			</Label>
+			<Tooltip.Root>
+				<Tooltip.Trigger>
+					<Checkbox
+						id="UpperCase"
+						bind:checked={UpperCase}
+						on:click={HandleChangeOptions}
+						aria-labelledby="UpperCase-label"
+					/>
+					<Label
+						id="UpperCase-label"
+						for="UpperCase"
+						class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+					>
+						UpperCase
+					</Label>
+				</Tooltip.Trigger>
+				<Tooltip.Content>
+					<p>Use uppercase characters like: ABCDEFG...</p>
+				</Tooltip.Content>
+			</Tooltip.Root>
+
+			<Tooltip.Root>
+				<Tooltip.Trigger>
+					<Checkbox
+						id="Numbers"
+						bind:checked={Numbers}
+						on:click={HandleChangeOptions}
+						aria-labelledby="Numbers-label"
+					/>
+
+					<Label
+						id="Numbers-label"
+						for="Numbers"
+						class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+					>
+						Numbers
+					</Label>
+				</Tooltip.Trigger>
+				<Tooltip.Content>
+					<p>Use numbers like: 1234567890</p>
+				</Tooltip.Content>
+			</Tooltip.Root>
+			<Tooltip.Root>
+				<Tooltip.Trigger>
+					<Checkbox
+						id="ExcludeSimilar"
+						bind:checked={ExcludeSimilar}
+						on:click={HandleChangeOptions}
+						aria-labelledby="ExcludeSimilar-label"
+					/>
+					<Label
+						id="ExcludeSimilar-label"
+						for="ExcludeSimilar"
+						class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+					>
+						Exclude Similar
+					</Label>
+				</Tooltip.Trigger>
+				<Tooltip.Content>
+					<p>Don't use difficult to distinguish characters like: 1lL and 0oO</p>
+				</Tooltip.Content>
+			</Tooltip.Root>
 		</div>
 		<div class="mt-2 flex space-x-2">
-			<Checkbox
-				id="SimpleSymbols"
-				bind:checked={SimpleSymbols}
-				on:click={HandleChangeOptions}
-				aria-labelledby="SimpleSymbols-label"
-			/>
-			<Label
-				id="SimpleSymbols-label"
-				for="SimpleSymbols"
-				class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-			>
-				Simple Symbols
-			</Label>
-			<Checkbox
-				id="Symbols"
-				bind:checked={Symbols}
-				on:click={HandleChangeOptions}
-				aria-labelledby="Symbols-label"
-			/>
-			<Label
-				id="Symbols-label"
-				for="Symbols"
-				class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-			>
-				Symbols
-			</Label>
+			<Tooltip.Root>
+				<Tooltip.Trigger>
+					<Checkbox
+						id="SimpleSymbols"
+						bind:checked={SimpleSymbols}
+						on:click={HandleChangeOptions}
+						aria-labelledby="SimpleSymbols-label"
+					/>
+					<Label
+						id="SimpleSymbols-label"
+						for="SimpleSymbols"
+						class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+					>
+						Simple Symbols
+					</Label>
+				</Tooltip.Trigger>
+				<Tooltip.Content>
+					<p>Use only simple symbols like: !@#</p>
+				</Tooltip.Content>
+			</Tooltip.Root>
+			<Tooltip.Root>
+				<Tooltip.Trigger>
+					<Checkbox
+						id="Symbols"
+						bind:checked={Symbols}
+						on:click={HandleChangeOptions}
+						aria-labelledby="Symbols-label"
+					/>
+					<Label
+						id="Symbols-label"
+						for="Symbols"
+						class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+					>
+						Symbols
+					</Label>
+				</Tooltip.Trigger>
+				<Tooltip.Content>
+					<p>Use all symbols like: !@#$%&*_-/\</p>
+				</Tooltip.Content>
+			</Tooltip.Root>
 		</div>
 		<div class="mt-2 flex space-x-2">
 			<Button variant={'outline'} class="drop-shadow-lg" on:click={HandleGeneratePasswords}

@@ -34,7 +34,9 @@
 		);
 	});
 
-	function HandleGeneratePasswords() {
+	async function clearAndRegenerate() {
+		ListOfPasswords = [];
+		await new Promise((f) => setTimeout(f, 1000));
 		generatePasswords(
 			AmountPasswords,
 			PasswordLength,
@@ -50,19 +52,6 @@
 		location.reload();
 	}
 
-	async function HandleChangeOptions() {
-		ListOfPasswords = [];
-		await new Promise((f) => setTimeout(f, 1000));
-		generatePasswords(
-			AmountPasswords,
-			PasswordLength,
-			UpperCase,
-			Numbers,
-			ExcludeSimilar,
-			Symbols,
-			SimpleSymbols
-		);
-	}
 	// Password Scripts
 	function arrayFromLowToHigh(low: number, high: number) {
 		const array = [];
@@ -252,11 +241,11 @@
 
 		<div class="mt-2 flex space-x-2">
 			<p>amount characters</p>
-			<Input type="number" bind:value={PasswordLength} on:change={HandleChangeOptions} />
+			<Input type="number" bind:value={PasswordLength} on:change={clearAndRegenerate} />
 		</div>
 		<div class="mt-2 flex space-x-2">
 			<p>amount of passwords</p>
-			<Input type="number" bind:value={AmountPasswords} on:change={HandleChangeOptions} />
+			<Input type="number" bind:value={AmountPasswords} on:change={clearAndRegenerate} />
 		</div>
 		<div class="mt-2 flex space-x-2">
 			<Tooltip.Root>
@@ -264,7 +253,7 @@
 					<Checkbox
 						id="UpperCase"
 						bind:checked={UpperCase}
-						on:click={HandleChangeOptions}
+						on:click={clearAndRegenerate}
 						aria-labelledby="UpperCase-label"
 					/>
 					<Label
@@ -285,7 +274,7 @@
 					<Checkbox
 						id="Numbers"
 						bind:checked={Numbers}
-						on:click={HandleChangeOptions}
+						on:click={clearAndRegenerate}
 						aria-labelledby="Numbers-label"
 					/>
 
@@ -306,7 +295,7 @@
 					<Checkbox
 						id="ExcludeSimilar"
 						bind:checked={ExcludeSimilar}
-						on:click={HandleChangeOptions}
+						on:click={clearAndRegenerate}
 						aria-labelledby="ExcludeSimilar-label"
 					/>
 					<Label
@@ -328,7 +317,7 @@
 					<Checkbox
 						id="SimpleSymbols"
 						bind:checked={SimpleSymbols}
-						on:click={HandleChangeOptions}
+						on:click={clearAndRegenerate}
 						aria-labelledby="SimpleSymbols-label"
 					/>
 					<Label
@@ -348,7 +337,7 @@
 					<Checkbox
 						id="Symbols"
 						bind:checked={Symbols}
-						on:click={HandleChangeOptions}
+						on:click={clearAndRegenerate}
 						aria-labelledby="Symbols-label"
 					/>
 					<Label
@@ -365,7 +354,7 @@
 			</Tooltip.Root>
 		</div>
 		<div class="mt-2 flex space-x-2">
-			<Button variant={'outline'} class="drop-shadow-lg" on:click={HandleGeneratePasswords}
+			<Button variant={'outline'} class="drop-shadow-lg" on:click={clearAndRegenerate}
 				>Generate Password(s)</Button
 			>
 			<Button variant={'outline'} class="drop-shadow-lg" on:click={HandleReset}>Reset</Button>

@@ -24,7 +24,7 @@
 
 	onMount(() => {
 		generatePasswords(
-			5,
+			AmountPasswords,
 			PasswordLength,
 			UpperCase,
 			Numbers,
@@ -51,11 +51,10 @@
 	}
 
 	async function HandleChangeOptions() {
-		let currentPasswords = ListOfPasswords.length;
 		ListOfPasswords = [];
 		await new Promise((f) => setTimeout(f, 1000));
 		generatePasswords(
-			currentPasswords,
+			AmountPasswords,
 			PasswordLength,
 			UpperCase,
 			Numbers,

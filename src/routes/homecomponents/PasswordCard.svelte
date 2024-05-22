@@ -94,14 +94,16 @@
 
 		const passwordCharacters = [];
 
-		if (includeNumbers) {
-			const numberCode = NUMBER_CHAR_CODES[Math.floor(Math.random() * NUMBER_CHAR_CODES.length)];
-			passwordCharacters.push(String.fromCharCode(numberCode));
-		}
+		const guaranteedNumberIndex = Math.floor(Math.random() * characterAmount);
 
-		for (let i = passwordCharacters.length; i < characterAmount; i++) {
-			const characterCode = charCodes[Math.floor(Math.random() * charCodes.length)];
-			passwordCharacters.push(String.fromCharCode(characterCode));
+		for (let i = 0; i < characterAmount; i++) {
+			if (i === guaranteedNumberIndex && includeNumbers) {
+				const numberCode = NUMBER_CHAR_CODES[Math.floor(Math.random() * NUMBER_CHAR_CODES.length)];
+				passwordCharacters.push(String.fromCharCode(numberCode));
+			} else {
+				const characterCode = charCodes[Math.floor(Math.random() * charCodes.length)];
+				passwordCharacters.push(String.fromCharCode(characterCode));
+			}
 		}
 
 		let NewPassword = passwordCharacters.join('');
@@ -113,14 +115,15 @@
 			HasSpecialChar = pattern.test(NewPassword);
 		}
 
-		console.log(HasSpecialChar, includeSimpleSymbols)
-
 		if (!HasSpecialChar && includeSimpleSymbols) {
+			// Ensure the guaranteed special character doesn't override the guaranteed number
 			let randomIndex = Math.floor(Math.random() * characterAmount);
-			let passwordArray = NewPassword.split('');
-			passwordArray[randomIndex] =
-				SIMPLE_SYMBOLS_CHAR_CODES[Math.floor(Math.random() * SIMPLE_SYMBOLS_CHAR_CODES.length)];
-			NewPassword = passwordArray.join('');
+			if (randomIndex !== guaranteedNumberIndex) {
+				let passwordArray = NewPassword.split('');
+				passwordArray[randomIndex] =
+					SIMPLE_SYMBOLS_CHAR_CODES[Math.floor(Math.random() * SIMPLE_SYMBOLS_CHAR_CODES.length)];
+				NewPassword = passwordArray.join('');
+			}
 		}
 
 		return NewPassword;

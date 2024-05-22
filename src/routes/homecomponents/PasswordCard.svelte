@@ -87,35 +87,35 @@
 		includeSimpleSymbols: boolean
 	) {
 		let charCodes = LOWERCASE_CHAR_CODES;
-		if (includeUppercase === true) charCodes = charCodes.concat(UPPERCASE_CHAR_CODES);
-		if (includeNumbers === true) charCodes = charCodes.concat(NUMBER_CHAR_CODES);
-		if (includeSymbols === true) charCodes = charCodes.concat(SYMBOL_CHAR_CODES);
+		if (includeUppercase) charCodes = charCodes.concat(UPPERCASE_CHAR_CODES);
+		if (includeNumbers) charCodes = charCodes.concat(NUMBER_CHAR_CODES);
+		if (includeSymbols) charCodes = charCodes.concat(SYMBOL_CHAR_CODES);
 		if (ExcludeSimilar) removeItemsFromArray(charCodes, [48, 49, 73, 79, 105, 108, 111]);
 
 		const passwordCharacters = [];
 
-		for (let i = 0; i < characterAmount; i++) {
+		if (includeNumbers) {
+			const numberCode = NUMBER_CHAR_CODES[Math.floor(Math.random() * NUMBER_CHAR_CODES.length)];
+			passwordCharacters.push(String.fromCharCode(numberCode));
+		}
+
+		for (let i = passwordCharacters.length; i < characterAmount; i++) {
 			const characterCode = charCodes[Math.floor(Math.random() * charCodes.length)];
 			passwordCharacters.push(String.fromCharCode(characterCode));
 		}
+
 		let NewPassword = passwordCharacters.join('');
 
-		let HasSpecialChar = true;
+		let HasSpecialChar = false;
 
-		if (includeSymbols === true) {
+		if (includeSymbols) {
 			let pattern = /[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
 			HasSpecialChar = pattern.test(NewPassword);
 		}
 
-		if (HasSpecialChar === false) {
-			let passwordArray = NewPassword.split('');
-			let randomItem = Math.floor(Math.random() * passwordArray.length);
-			let characterCode2 = SYMBOL_CHAR_CODES[Math.floor(Math.random() * SYMBOL_CHAR_CODES.length)];
-			passwordArray[randomItem] = String.fromCharCode(characterCode2);
-			NewPassword = passwordArray.join('');
-		}
+		console.log(HasSpecialChar, includeSimpleSymbols)
 
-		if (!includeSymbols && includeSimpleSymbols) {
+		if (!HasSpecialChar && includeSimpleSymbols) {
 			let randomIndex = Math.floor(Math.random() * characterAmount);
 			let passwordArray = NewPassword.split('');
 			passwordArray[randomIndex] =

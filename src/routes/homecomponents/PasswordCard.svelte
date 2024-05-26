@@ -118,8 +118,18 @@
 		if (!HasSpecialChar && includeSimpleSymbols) {
 			// Ensure the guaranteed special character doesn't override the guaranteed number
 			let randomIndex = Math.floor(Math.random() * characterAmount);
+			let passwordArray = NewPassword.split('');
 			if (randomIndex !== guaranteedNumberIndex) {
-				let passwordArray = NewPassword.split('');
+				passwordArray[randomIndex] =
+					SIMPLE_SYMBOLS_CHAR_CODES[Math.floor(Math.random() * SIMPLE_SYMBOLS_CHAR_CODES.length)];
+				NewPassword = passwordArray.join('');
+			} else {
+				if(passwordArray.length - randomIndex > 1) {
+					randomIndex++;
+				} else {
+					randomIndex--;
+				}
+
 				passwordArray[randomIndex] =
 					SIMPLE_SYMBOLS_CHAR_CODES[Math.floor(Math.random() * SIMPLE_SYMBOLS_CHAR_CODES.length)];
 				NewPassword = passwordArray.join('');
